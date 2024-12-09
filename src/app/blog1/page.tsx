@@ -12,7 +12,7 @@ export default function Blog1() {
           Combining minimalist approaches with vibrant color palettes and
           user-centered experiences, millennial design has redefined how
           products, brands, and digital interfaces are created. In this blog, we
-          explore what millennial design is, its defining features, and why it's
+          explore what millennial design is, its defining features, and why its
           becoming a cornerstone of modern design practices.
         </p>
         <strong>The Rise of Millennial Design</strong>
@@ -39,7 +39,7 @@ export default function Blog1() {
             <strong>Vibrant Color Palettes</strong>: One of the hallmark
             features of millennial design is the use of vibrant and pastel color
             schemes. Soft, muted tones mixed with bolder colors create a warm,
-            welcoming, and engaging aesthetic. Whether it’s on websites, product
+            welcoming, and engaging aesthetic. Whether its on websites, product
             packaging, or apps, these colors evoke feelings of energy,
             creativity, and optimism.
           </li>
@@ -49,7 +49,7 @@ export default function Blog1() {
             products that communicate transparency and genuine storytelling
             through their design choices resonate well with this generation.
             This means embracing real images, minimal use of stock photography,
-            and designs that speak to the brand’s values and mission.
+            and designs that speak to the brands values and mission.
           </li>
           <li>
             <strong>Bold Typography</strong>: Typography has become a critical
@@ -92,12 +92,12 @@ export default function Blog1() {
           Millennial design is far from a passing trend. As technology evolves
           and new generations enter the workforce, we can expect these design
           principles to continue to influence the creative industry. Millennial
-          design's focus on simplicity, authenticity, and emotional connection
+          designs focus on simplicity, authenticity, and emotional connection
           will likely remain relevant, while new elements—such as AI-powered
           personalization—may be added to enhance the user experience.
         </p>
         <p>
-          As we move into the future, it’s clear that millennial design will
+          As we move into the future, its clear that millennial design will
           continue to shape not only product aesthetics but also how businesses
           communicate with their customers. Brands that embrace these principles
           will have a better chance of standing out in an increasingly crowded

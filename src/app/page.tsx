@@ -82,8 +82,8 @@ export default function Page(){
             </span>
 
             <div className='absolute inset-0 bg-[#3A3A3A] bg-opacity-60 flex items-center justify-center flex-col'>
-              <button className='text-[#B88E2F] text-[16px] font-semibold bg-[#FFFFFF] w-[202px] h-[48px]'>Add to cart</button>
-              <div className='flex items-center justify-around gap-4 mt-6 text-[#FFFFFF]'>
+            <Link href={"/cart"}> <button className='text-[#B88E2F] text-[16px] font-semibold bg-[#FFFFFF] w-[202px] h-[48px]'>Add to cart</button>
+           </Link>   <div className='flex items-center justify-around gap-4 mt-6 text-[#FFFFFF]'>
                 <Image
                   src={"/images/share.svg"}
                   alt='icon-1'

@@ -1,9 +1,38 @@
+"use client";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function ShopPage() {
-  return (
+  const [selectedNumber, setSelectedNumber] = useState<number>(1); // Default selected number is 1
+  const [dropdownSelectedNumber, setDropdownSelectedNumber] = useState<number | null>(null); // For dropdown logic
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+const handleNumberSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const dropdownselectedValue =parseInt(event.target.value);
+  setDropdownSelectedNumber(dropdownselectedValue);
+}
+
+const handleOptionSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const selectedValue = event.target.value;
+  setSelectedOption(selectedValue);
+};
+
+const handleNext = () => {
+  setSelectedNumber((prev) => {
+    if (prev === 3) return 1; // Cycles 3 -> 1
+    return prev + 1; // Cycles 1 -> 2 -> 3 -> 1
+  });
+};
+
+const handlePrevious = () => {
+  setSelectedNumber((prev) => {
+    if (prev === 1) return 3; // Cycles 1 -> 3
+    return prev - 1; // Cycles 3 -> 2 -> 1 -> 3
+  });
+};
+return (
     <>
       <div>
         <Image
@@ -43,34 +72,59 @@ export default function ShopPage() {
             Showing 1–16 of 32 results
           </span>
           <span className="text-xs sm:text-sm md:text-base">Show</span>
-
-          <div className="w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] bg-white flex items-center justify-center ">
-            <h3 className="text-[#9F9F9F] text-xs sm:text-sm md:text-base">
-              16
-            </h3>
-          </div>
-
+          
+    <div>
+      {/* Dropdown with numbers 1 to 16 */}
+      <div className="mt-2">
+        <select
+          value={dropdownSelectedNumber || ""}
+          onChange={handleNumberSelect}
+          className="w-full h-[50px] border rounded"
+        >
+          <option value="" disabled>
+            Select a number
+          </option>
+          {Array.from({ length: 16 }, (_, i) => i + 1).map((number) => (
+            <option key={number} value={number}>
+              {number}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
           <span className="text-xs sm:text-sm md:text-base">Short by</span>
 
-          <div className="w-[45px] sm:w-[55px] h-[45px] sm:h-[55px] bg-white flex items-center justify-center ">
-            <h3 className="text-[#9F9F9F] text-xs sm:text-sm md:text-base">
-              Default
-            </h3>
-          </div>
-        </div>
+          <div>
+     
+      {/* Dropdown with sorting options */}
+      <div className="mt-2">
+        <select
+          value={selectedOption || ""}
+          onChange={handleOptionSelect}
+          className="w-full h-[50px] border rounded"
+        >
+          <option value="" disabled>
+            Sort Options
+          </option>
+          <option value="sort-by-name">Sort by Name</option>
+          <option value="sort-by-title">Sort by Title</option>
+          <option value="sort-az">Sort by A-Z</option>
+          <option value="sort-za">Sort by Z-A</option>
+          <option value="sort-low-high">Low to High</option>
+        </select>
+      </div>
+    </div>        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mx-auto max-w-screen-xl mt-8">
         <div className="w-[285px] h-[446px] bg-[#F4F5F7] mx-auto">
-        
-            {" "}
-            <Image
-              src={"/images/table.png"}
-              alt="table-img"
-              width={285}
-              height={301}
-            />
-        
+          {" "}
+          <Image
+            src={"/images/table.png"}
+            alt="table-img"
+            width={285}
+            height={301}
+          />
           <h3 className="text-[24px] font-semibold text-[#3A3A3A] ml-6 mt-4">
             Syltherine
           </h3>
@@ -363,21 +417,55 @@ export default function ShopPage() {
           <span className="text-[20px] font-semibold">Rp 500.000</span>
         </div>
       </div>
-
       <div className="flex items-center justify-center gap-8 mt-14">
-        <div className="w-[60px] h-[60px] bg-[#B88E2F] text-white flex items-center justify-center">
-          1
-        </div>
-        <div className="w-[60px] h-[60px] bg-[#F9F1E7] flex items-center justify-center">
-          2
-        </div>
-        <div className="w-[60px] h-[60px] bg-[#F9F1E7] flex items-center justify-center">
-          3
-        </div>
-        <div className="w-[60px] h-[60px] bg-[#F9F1E7] flex items-center justify-center">
-          Next
-        </div>
+      {/* Number 1 */}
+      <div
+        className={`w-[60px] h-[60px] flex items-center justify-center ${
+          selectedNumber === 1 ? "text-white bg-yellow-600" : "text-black"
+        } bg-[#F9F1E7] border border-black`}
+      >
+        1
       </div>
+{/* Number 2 */}
+      <div
+        className={`w-[60px] h-[60px] flex items-center justify-center ${
+          selectedNumber === 2 ? "text-white bg-yellow-600" : "text-black #F9F1E7"
+        } bg-[#F9F1E7] border border-black`}
+      >
+        2
+      </div>
+
+      {/* Number 3 */}
+      <div
+        className={`w-[60px] h-[60px] flex items-center justify-center ${
+          selectedNumber === 3 ? "text-white bg-yellow-600" : "text-black"
+        } bg-[#F9F1E7] border border-black`}
+      >
+        3
+      </div>
+
+      {/* Previous Button */}
+      
+     <Link href={"/shop"}> <button
+        onClick={handlePrevious}
+        className="w-[60px] h-[60px] bg-[#F9F1E7] text-black flex items-center justify-center cursor-pointer border border-black"
+      >
+        Prev
+      </button>
+</Link>
+      {/* Next Button */}
+      
+     <Link href={"/shop"}> 
+      <button
+        onClick={handleNext}
+        className="w-[60px] h-[60px] bg-[#F9F1E7] text-black flex items-center justify-center cursor-pointer border border-black"
+      >
+        Next
+      </button>
+    </Link>
+    </div>
+    
+
     </>
   );
 }

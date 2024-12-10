@@ -1,8 +1,8 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-
-const ProductPage = () => {
+export default function ProductPage() {
   return (
     <>
       {/* Main Product Banner */}
@@ -19,7 +19,9 @@ const ProductPage = () => {
       <div className="flex flex-wrap items-center justify-between mt-8 px-4">
         {/* Text Section */}
         <div className="flex flex-col mb-6 sm:mb-0 w-full sm:w-1/2">
-          <h1 className="text-[24px] sm:text-[28px] font-semibold">Go to Product page for more Products</h1>
+          <h1 className="text-[24px] sm:text-[28px] font-semibold">
+            Go to Product page for more Products
+          </h1>
           <span className="text-[#727272] mt-4 sm:mt-6 underline text-[18px] sm:text-[20px]">
             View More
           </span>
@@ -36,7 +38,9 @@ const ProductPage = () => {
               height={177}
               className="w-full"
             />
-            <h1 className="text-[20px] sm:text-[24px] font-semibold">Asgaard Sofa</h1>
+            <h1 className="text-[20px] sm:text-[24px] font-semibold">
+              Asgaard Sofa
+            </h1>
             <span>Rs. 250,000.00</span>
             <div className="flex items-center justify-start gap-3 sm:gap-5 mt-2">
               <span>4.7</span>
@@ -60,7 +64,9 @@ const ProductPage = () => {
               height={211}
               className="w-full"
             />
-            <h1 className="text-[20px] sm:text-[24px] font-semibold">Outdoor Sofa Set</h1>
+            <h1 className="text-[20px] sm:text-[24px] font-semibold">
+              Outdoor Sofa Set
+            </h1>
             <span>Rs. 224,000.00</span>
             <div className="flex items-center justify-start gap-3 sm:gap-5 mt-2">
               <span>4.2</span>
@@ -78,7 +84,9 @@ const ProductPage = () => {
 
         {/* Add Product Section */}
         <div className="flex flex-col w-full sm:w-1/2 mt-8 sm:mt-0">
-          <h1 className="text-[20px] sm:text-[24px] font-semibold">Add A Product</h1>
+          <h1 className="text-[20px] sm:text-[24px] font-semibold">
+            Add A Product
+          </h1>
           <div className="flex items-center justify-around w-full sm:w-[242px] h-[39px] text-white bg-[#B88E2F] mt-4 sm:mt-6">
             <button className="w-full sm:w-auto">Choose a Product</button>
             <Image
@@ -159,56 +167,64 @@ const ProductPage = () => {
         </div>
       </div>
 
-     {/* Warranty Details */}
-<div className="flex flex-wrap items-start justify-between mt-14 sm:text-[20px] text-[18px] sm:px-6 px-4">
-  {/* Column 1 - Warranty Labels */}
-  <div className="flex flex-col gap-6 mb-6 sm:mb-0 sm:mx-auto w-full sm:w-1/3">
-    <h1 className="text-[24px] sm:text-[28px] font-semibold">Warranty</h1>
-    <h4>Warranty Summary</h4>
-    <h4>Warranty Service Type</h4>
-    <h4>Covered in Warranty</h4>
-    <h4>Not Covered in Warranty</h4>
-    <h4>Domestic Warranty</h4>
-  </div>
+      {/* Warranty Details */}
+      <div className="flex flex-wrap items-start justify-between mt-14 sm:text-[20px] text-[18px] sm:px-6 px-4">
+        {/* Column 1 - Warranty Labels */}
+        <div className="flex flex-col gap-6 mb-6 sm:mb-0 sm:mx-auto w-full sm:w-1/3">
+          <h1 className="text-[24px] sm:text-[28px] font-semibold">Warranty</h1>
+          <h4>Warranty Summary</h4>
+          <h4>Warranty Service Type</h4>
+          <h4>Covered in Warranty</h4>
+          <h4>Not Covered in Warranty</h4>
+          <h4>Domestic Warranty</h4>
+        </div>
 
-  {/* Column 2 - Warranty Details for Product 1 */}
-  <div className="flex flex-col gap-6 sm:mt-0 sm:mx-auto w-full sm:w-1/3">
-    <h4 className="w-full sm:w-[226px]">1 Year Manufacturing Warranty</h4>
-    <h4 className="w-full sm:w-[241px] ">
-      For Warranty Claims or Any Product Related Issues Please Email at operations@trevifurniture.com
-    </h4>
-    <h4 className="w-full sm:w-[241px] ">Warranty Against Manufacturing Defect</h4>
-    <h4 className="w-full sm:w-[241px] ">
-      The Warranty Does Not Cover Damages Due To Usage Of The Product Beyond Its Intended Use And Wear & Tear.
-    </h4>
-    <h4>1 Year</h4>
-    <button className="w-full sm:w-[215px] h-[50px] bg-[#B88E2F] text-white mt-6 sm:mt-10 rounded-lg shadow-lg mb-6">
-      Add To Cart
-    </button>
-  </div>
+        {/* Column 2 - Warranty Details for Product 1 */}
+        <div className="flex flex-col gap-6 sm:mt-0 sm:mx-auto w-full sm:w-1/3">
+          <h4 className="w-full sm:w-[226px]">1 Year Manufacturing Warranty</h4>
+          <h4 className="w-full sm:w-[241px] ">
+            For Warranty Claims or Any Product Related Issues Please Email at
+            operations@trevifurniture.com
+          </h4>
+          <h4 className="w-full sm:w-[241px] ">
+            Warranty Against Manufacturing Defect
+          </h4>
+          <h4 className="w-full sm:w-[241px] ">
+            The Warranty Does Not Cover Damages Due To Usage Of The Product
+            Beyond Its Intended Use And Wear & Tear.
+          </h4>
+          <h4>1 Year</h4>
+          <Link href="/cart">
+            <button className="w-full sm:w-[215px] h-[50px] bg-[#B88E2F] text-white mt-6 sm:mt-10 rounded-lg shadow-lg mb-6">
+              Add To Cart
+            </button>
+          </Link>
+        </div>
 
-  {/* Column 3 - Warranty Details for Product 2 */}
-  <div className="flex flex-col gap-6 sm:mt-0 sm:mx-auto w-full sm:w-1/3">
-    <h4 className="w-full sm:w-[226px]">1.2 Year Manufacturing Warranty</h4>
-    <h4 className="w-full sm:w-[241px] ">
-      For Warranty Claims or Any Product Related Issues Please Email at support@xyz.com
-    </h4>
-    <h4 className="w-full sm:w-[241px] ">Warranty of the product is limited to manufacturing defects only.</h4>
-    <h4 className="w-full sm:w-[241px] ">
-      The Warranty Does Not Cover Damages Due To Usage Of The Product Beyond Its Intended Use.
-    </h4>
-    <h4>3 Months</h4>
-    <button className="w-full sm:w-[215px] h-[50px] bg-[#B88E2F] text-white mt-6 sm:mt-10 rounded-lg shadow-lg">
-      Add To Cart
-    </button>
-    
-    
-  </div>
-</div>
-
-
+        {/* Column 3 - Warranty Details for Product 2 */}
+        <div className="flex flex-col gap-6 sm:mt-0 sm:mx-auto w-full sm:w-1/3">
+          <h4 className="w-full sm:w-[226px]">
+            1.2 Year Manufacturing Warranty
+          </h4>
+          <h4 className="w-full sm:w-[241px] ">
+            For Warranty Claims or Any Product Related Issues Please Email at
+            support@xyz.com
+          </h4>
+          <h4 className="w-full sm:w-[241px] ">
+            Warranty of the product is limited to manufacturing defects only.
+          </h4>
+          <h4 className="w-full sm:w-[241px] ">
+            The Warranty Does Not Cover Damages Due To Usage Of The Product
+            Beyond Its Intended Use.
+          </h4>
+          <h4>3 Months</h4>
+          <Link href={"/cart"}>
+            <button className="w-full sm:w-[215px] h-[50px] bg-[#B88E2F] text-white mt-6 sm:mt-10 rounded-lg shadow-lg">
+              Add To Cart
+            </button>
+          </Link>
+        </div>
+      </div>
     </>
   );
-};
-
-export default ProductPage;
+}

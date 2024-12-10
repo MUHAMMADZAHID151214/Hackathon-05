@@ -57,6 +57,8 @@ export default function Header() {
 
         {/* Desktop Icons */}
         <div className="hidden sm:flex items-center space-x-6">
+          
+        <Link href="/contact">
           <Image
             src="/images/contact-icon.svg"
             alt="Contact"
@@ -64,6 +66,9 @@ export default function Header() {
             height={24}
             className="w-6 h-6 cursor-pointer hover:opacity-80"
           />
+          </Link>
+          
+          <Link href="/searches">
           <Image
             src="/images/search-icon.svg"
             alt="Search"
@@ -71,7 +76,9 @@ export default function Header() {
             height={24}
             className="w-6 h-6 cursor-pointer hover:opacity-80"
           />
-          <Link href="/favorites">
+          </Link>
+          
+          <Link href="/mostfavourites">
             <Image
               src="/images/heart-icon.svg"
               alt="Favorites"
@@ -79,8 +86,8 @@ export default function Header() {
               height={24}
               className="w-6 h-6 cursor-pointer hover:opacity-80"
             />
-          </Link>
-          <Link href="/cart">
+            </Link>
+          <Link href="/shop">
             <Image
               src="/images/cart-icon.svg"
               alt="Cart"

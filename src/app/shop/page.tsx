@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ProductCards from "../Products/page";
+import ProductCards from "@/app/Products/page";
+
 
 export default function ShopPage() {
   const [selectedNumber, setSelectedNumber] = useState<number>(1);

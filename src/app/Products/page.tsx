@@ -19,7 +19,7 @@ interface Product {
   description: string;
   discountPercentage: number;
   imageUrl: string;
-  productImage: {
+  productImage?: {
     asset: {
       _ref: string;
     };
@@ -179,17 +179,15 @@ const ProductCards: React.FC<ProductCardsProps> = ({ searchQuery = "", sortOptio
                     </div>
                   </div>
 
-                  <Link href="/cart">
-                    <button
-                      className="w-full bg-[#B88E2F] text-white font-bold py-2 px-4 rounded shadow hover:bg-white hover:text-[#B88E2F] hover:shadow-md"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addToCart(product, productQuantity);
-                      }}
-                    >
-                      Add to Cart
-                    </button>
-                  </Link>
+                  <button
+                    className="w-full bg-[#B88E2F] text-white font-bold py-2 px-4 rounded shadow hover:bg-white hover:text-[#B88E2F] hover:shadow-md"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      addToCart(product, productQuantity);
+                    }}
+                  >
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             );

@@ -38,6 +38,14 @@ export const product = defineType({
             title: "Price",
         },
         {
+            name: "phone",
+            type: "number",
+            validation: (rule) => rule.required(),
+            title: "Phone No",
+            
+
+        },
+        {
             name: "tags",
             type: "array",
             title: "Tags",

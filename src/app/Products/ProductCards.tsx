@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { createClient } from "@sanity/client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const sanity = createClient({
   projectId: "weoe5nuj",
@@ -11,6 +12,11 @@ const sanity = createClient({
   apiVersion: "2025-01-13",
   useCdn: true,
 });
+
+// Define a custom loader for Sanity images
+const sanityImageLoader = ({ src, width, quality }: { src: string; width: number; quality?: number }) => {
+  return `${src}?w=${width}&q=${quality || 75}`;
+};
 
 interface Product {
   _id: string;
@@ -40,11 +46,12 @@ interface ProductCardsProps {
   sortOption?: string;
 }
 
-const ProductCards: React.FC<ProductCardsProps> = ({ searchQuery = "", sortOption = "" }) => {
+const ProductCards: React.FC<ProductCardsProps> = ({ searchQuery = "", sortOption = "sort-by-title" }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [quantityMap, setQuantityMap] = useState<Record<string, number>>({});
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -62,7 +69,7 @@ const ProductCards: React.FC<ProductCardsProps> = ({ searchQuery = "", sortOptio
             slug
           }
         `;
-        const data = await sanity.fetch(query);
+        const data: Product[] = await sanity.fetch(query);
         setProducts(data);
         setFilteredProducts(data);
       } catch (error) {
@@ -80,38 +87,39 @@ const ProductCards: React.FC<ProductCardsProps> = ({ searchQuery = "", sortOptio
       product.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    if (sortOption) {
-      switch (sortOption) {
-        case "sort-by-title":
-        case "sort-az":
-          filtered = [...filtered].sort((a, b) => a.title.localeCompare(b.title));
-          break;
-        case "sort-za":
-          filtered = [...filtered].sort((a, b) => b.title.localeCompare(a.title));
-          break;
-        case "sort-low-high":
-          filtered = [...filtered].sort((a, b) => a.price - b.price);
-          break;
-        case "sort-high-low":
-          filtered = [...filtered].sort((a, b) => b.price - a.price);
-          break;
-      }
+    switch (sortOption) {
+      case "sort-by-title":
+      case "sort-az":
+        filtered = [...filtered].sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case "sort-za":
+        filtered = [...filtered].sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      case "sort-low-high":
+        filtered = [...filtered].sort((a, b) => a.price - b.price);
+        break;
+      case "sort-high-low":
+        filtered = [...filtered].sort((a, b) => b.price - a.price);
+        break;
     }
 
     setFilteredProducts(filtered);
   }, [searchQuery, sortOption, products]);
 
   const addToCart = (product: Product, quantity: number) => {
-    const cartItems = JSON.parse(localStorage.getItem("cart") || "[]");
-    const existingProductIndex = cartItems.findIndex((item: CartProduct) => item._id === product._id);
+    if (typeof window !== "undefined") {
+      const cartItems: CartProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
+      const existingProductIndex = cartItems.findIndex((item) => item._id === product._id);
 
-    if (existingProductIndex >= 0) {
-      cartItems[existingProductIndex].quantity += quantity;
-    } else {
-      cartItems.push({ ...product, quantity });
+      if (existingProductIndex >= 0) {
+        cartItems[existingProductIndex].quantity += quantity;
+      } else {
+        cartItems.push({ ...product, quantity });
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      router.push("/cart");
     }
-
-    localStorage.setItem("cart", JSON.stringify(cartItems));
   };
 
   const handleQuantityChange = (productId: string, newQuantity: number) => {
@@ -134,6 +142,7 @@ const ProductCards: React.FC<ProductCardsProps> = ({ searchQuery = "", sortOptio
               >
                 <Link href={`/product/${product.slug?.current || product._id}`}>
                   <Image
+                    loader={sanityImageLoader}
                     src={product.imageUrl}
                     alt={product.title}
                     width={300}
@@ -149,13 +158,9 @@ const ProductCards: React.FC<ProductCardsProps> = ({ searchQuery = "", sortOptio
                         : product.description}
                     </p>
                     <div className="flex justify-between items-center mt-4">
-                      <p className="text-slate-600 font-bold">
-                        Rs. {product.price.toFixed(2)}
-                      </p>
+                      <p className="text-slate-600 font-bold">Rs. {product.price.toFixed(2)}</p>
                       {product.discountPercentage > 0 && (
-                        <p className="text-sm text-green-600">
-                          {product.discountPercentage}% OFF
-                        </p>
+                        <p className="text-sm text-green-600">{product.discountPercentage}% OFF</p>
                       )}
                     </div>
                   </div>
@@ -178,7 +183,6 @@ const ProductCards: React.FC<ProductCardsProps> = ({ searchQuery = "", sortOptio
                       </button>
                     </div>
                   </div>
-
                   <button
                     className="w-full bg-[#B88E2F] text-white font-bold py-2 px-4 rounded shadow hover:bg-white hover:text-[#B88E2F] hover:shadow-md"
                     onClick={(e) => {
